@@ -2,11 +2,13 @@ version: "3.1"
 
 stories:
 
-- story: User sets water goal
+- story: user sets daily water goal
   steps:
-  - intent: greet
-  - action: utter_greet
   - intent: set_water_goal
+    entities:
+    - amount: "2"
+    - unit: "л"
+    - drink: "кофе"
   - action: action_set_water_goal
   - action: utter_water_goal_set
 
@@ -17,10 +19,36 @@ stories:
   - action: utter_water_intake_logged
   - action: action_listen
 
+- story: user logs water intake in liters
+  steps:
+  - intent: inform_water_intake
+    entities:
+    - amount: "0.5"
+    - unit: "л"
+    - drink: "вода"
+  - action: action_log_water
+  - action: utter_water_intake_logged
+
+- story: user logs water intake in milliliters
+  steps:
+  - intent: inform_water_intake
+    entities:
+    - amount: "250"
+    - unit: "мл"
+    - drink: "сок"
+  - action: action_log_water
+  - action: utter_water_intake_logged
+
 - story: User updates weight
   steps:
   - intent: inform_weight
   - action: action_calculate_water_need
+  - action: action_listen
+
+- story: user queries remaining water intake for the day
+  steps:
+  - intent: ask_remaining_intake
+  - action: action_provide_remaining_intake
   - action: action_listen
 
 - story: User enables and queries reminders
@@ -31,31 +59,26 @@ stories:
   - intent: ask_water_intake
   - action: action_provide_water_intake
 
-- story: User checks remaining intake for the day
+- story: complex conversation with goal setting, logging, and querying
   steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: set_water_goal
+    entities:
+    - amount: "200"
+    - unit: "мл"
+    - drink: "вода"
+  - action: action_set_water_goal
+  - action: utter_water_goal_set
   - intent: inform_water_intake
+    entities:
+    - amount: "0.5"
+    - unit: "л"
+    - drink: "чай"
   - action: action_log_water
   - action: utter_water_intake_logged
   - intent: ask_remaining_intake
   - action: action_provide_remaining_intake
   - action: action_listen
-
-- story: Complex conversation with reminders, logging, and goal setting
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: enable_reminders
-  - action: action_enable_reminders
-  - action: utter_enable_reminders
-  - intent: set_water_goal
-  - action: action_set_water_goal
-  - action: utter_water_goal_set
-  - intent: inform_water_intake
-  - action: action_log_water
-  - action: utter_water_intake_logged
-  - intent: ask_remaining_intake
-  - action: action_provide_remaining_intake
-  - intent: goodbye
-  - action: utter_goodbye
 
 

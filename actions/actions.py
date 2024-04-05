@@ -22,7 +22,7 @@ class ActionCalculateWaterNeed(Action):
             dispatcher.utter_message(text=f"Основываясь на вашем весе, вам нужно пить {daily_need} мл воды в день.")
             return [SlotSet("daily_water_goal", daily_need)]
         except ValueError:
-            dispatcher.utter_message(text="Я не могу распознать ваш вес. Не могли бы вы указать его в килиграммах?")
+            dispatcher.utter_message(text="Я не могу распознать ваш вес. Не могли бы вы указать его в килограммах?")
             return []
 
 
@@ -87,6 +87,7 @@ class ActionProvideWaterIntake(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         daily_goal = tracker.get_slot("daily_water_goal")
+
         if daily_goal:
             dispatcher.utter_message(text=f"Ваша цель по ежедневному потреблению воды - {daily_goal} мл.")
         else:
@@ -102,6 +103,9 @@ class ActionProvideRemainingIntake(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         daily_goal = tracker.get_slot("daily_water_goal")
+        if not daily_goal:
+            dispatcher.utter_message(text="Цель еще не задана.")
+            return []
         water_intake_today = tracker.get_slot("water_intake_today")
         remaining_intake = daily_goal - water_intake_today
         if remaining_intake > 0:
