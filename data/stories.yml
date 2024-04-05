@@ -40,11 +40,6 @@ stories:
   - action: action_provide_remaining_intake
   - action: action_listen
 
-- story: User provides feedback
-  steps:
-  - intent: feedback
-  - action: utter_feedback_thanks
-
 - story: Complex conversation with reminders, logging, and goal setting
   steps:
   - intent: greet

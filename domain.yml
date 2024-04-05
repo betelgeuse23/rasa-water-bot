@@ -10,7 +10,6 @@ intents:
   - enable_reminders
   - ask_water_intake
   - ask_remaining_intake
-  - feedback
 
 entities:
   - person

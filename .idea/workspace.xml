@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4154647-4990-4fe2-8676-3c012b505a97" name="Changes" comment="add gitignore file">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/actions/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/actions/actions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/credentials.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/nlu.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/rules.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/stories.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/endpoints.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_stories.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/water-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/water-bot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d4154647-4990-4fe2-8676-3c012b505a97" name="Changes" comment="add basic logic" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +54,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712306601146</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add basic logic">
+      <option name="closed" value="true" />
+      <created>1712306639425</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712306639425</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -84,6 +78,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add gitignore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="add gitignore file" />
+    <MESSAGE value="add basic logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="add basic logic" />
   </component>
 </project>
