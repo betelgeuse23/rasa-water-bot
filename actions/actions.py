@@ -31,16 +31,16 @@ class ActionLogWater(Action):
         return "action_log_water"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: str) -> list:
+        current_intake = tracker.get_slot("water_intake_today")
         amount = next(tracker.get_latest_entity_values("amount"), None)
-        unit = next(tracker.get_latest_entity_values("unit"), None)
-        current_intake = tracker.get_slot("water_intake_today") or 0.0
-        if not amount or not unit:
+        unit = next(tracker.get_latest_entity_values("unit"), "ml").lower()
+        if not amount:
             dispatcher.utter_message(text="Я не понимаю, сколько воды вы выпили.")
             return []
 
         try:
             amount = float(amount)
-            if unit in ["л", "литр"]:
+            if unit in ["л", "литр", "литра", "литров"]:
                 amount *= 1000
             new_total = current_intake + amount
             dispatcher.utter_message(text=f"Добавлено {amount} мл жидкости.")
@@ -94,7 +94,7 @@ class ActionProvideRemainingIntake(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         daily_goal = tracker.get_slot("daily_water_goal")
-        water_intake_today = tracker.get_slot("water_intake_today") or 0
+        water_intake_today = tracker.get_slot("water_intake_today")
         remaining_intake = daily_goal - water_intake_today
         if remaining_intake > 0:
             dispatcher.utter_message(text=f"Сегодня вам осталось выпить {remaining_intake} мл воды, чтобы достичь своей цели.")
