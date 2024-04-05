@@ -40,11 +40,13 @@ nlu:
 
 - intent: inform_water_intake
   examples: |
-    - Выпила [500](amount) [мл](unit) воды
-    - Только что выпил [1](amount) [л](unit) сока
-    - Выпито [0.5](amount) [литр](unit) чая
-    - [250](amount) [миллилитров](unit) воды
-    - Я выпил [270](amount) [мл](unit) кофе
+    - Выпила [500](amount) [мл](unit) [воды](drink)
+    - Только что выпил [1](amount) [л](unit) [сока](drink)
+    - Выпито [0.5](amount) [литр](unit) [чая](drink)
+    - [250](amount) [миллилитров](unit) [воды](drink)
+    - Я выпил [270](amount) [мл](unit) [кофе](drink)
+    - Сейчас я выпил [0.230](amount) [л](unit) [воды](drink)
+    - Выпил [0.2](amount) [л](unit) [кофе](drink)
 
 - intent: enable_reminders
   examples: |
@@ -74,4 +76,29 @@ nlu:
     - Нужно ли чистить зубы?
     - Почему рыбы не летают?
     - длыофвщшфрт
+
+- synonym: литр
+  examples: |
+    - литров
+    - литра
+    - л
+
+- synonym: миллилитр
+  examples: |
+    - миллилитров
+    - миллилитра
+    - мл
+
+- synonym: вода
+  examples: |
+    - воды
+
+- synonym: чай
+  examples: |
+    - чая
+
+- synonym: сок
+  examples: |
+    - сока
+
 

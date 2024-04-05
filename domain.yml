@@ -17,6 +17,7 @@ entities:
   - amount
   - time
   - unit
+  - drink
 
 slots:
   person:

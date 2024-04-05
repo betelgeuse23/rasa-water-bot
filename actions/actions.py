@@ -33,7 +33,11 @@ class ActionLogWater(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: str) -> list:
         current_intake = tracker.get_slot("water_intake_today")
         amount = next(tracker.get_latest_entity_values("amount"), None)
-        unit = next(tracker.get_latest_entity_values("unit"), "ml").lower()
+        unit = next(tracker.get_latest_entity_values("unit"), "мл").lower()
+        drink = next(tracker.get_latest_entity_values("drink"), "вода").lower()
+
+        hydration_index = {"вода": 1.0, "сок": 0.89, "чай": 1.0, "кофе": 0.99}
+
         if not amount:
             dispatcher.utter_message(text="Я не понимаю, сколько воды вы выпили.")
             return []
@@ -42,8 +46,9 @@ class ActionLogWater(Action):
             amount = float(amount)
             if unit in ["л", "литр", "литра", "литров"]:
                 amount *= 1000
-            new_total = current_intake + amount
-            dispatcher.utter_message(text=f"Добавлено {amount} мл жидкости.")
+            adjusted_amount = amount * hydration_index.get(drink)
+            new_total = current_intake + adjusted_amount
+            dispatcher.utter_message(text=f"Добавлено {adjusted_amount} мл жидкости.")
             return [SlotSet("water_intake_today", new_total)]
         except ValueError:
             dispatcher.utter_message(text="Похоже, возникла проблема с указанными вами данными")
@@ -57,6 +62,7 @@ class ActionSetWaterGoal(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        unit = next(tracker.get_latest_entity_values("unit"), "мл").lower()
         goal = tracker.latest_message.get('entities', [{}])[0].get('value')
         if not goal:
             dispatcher.utter_message(text="Мне не удалось найти в вашем сообщении необходимое количество воды.")
@@ -64,6 +70,8 @@ class ActionSetWaterGoal(Action):
 
         try:
             goal = float(goal)
+            if unit in ["л", "литр", "литра", "литров"]:
+                goal *= 1000
             dispatcher.utter_message(text=f"Ваша ежедневная цель по потреблению воды установлена на {goal} мл.")
             return [SlotSet("daily_water_goal", goal)]
         except ValueError:
