@@ -1,0 +1,66 @@
+version: "3.1"
+
+stories:
+
+- story: User sets water goal
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: set_water_goal
+  - action: action_set_water_goal
+  - action: utter_water_goal_set
+
+- story: User logs water intake and waits
+  steps:
+  - intent: inform_water_intake
+  - action: action_log_water
+  - action: utter_water_intake_logged
+  - action: action_listen
+
+- story: User updates weight
+  steps:
+  - intent: inform_weight
+  - action: action_calculate_water_need
+  - action: action_listen
+
+- story: User enables and queries reminders
+  steps:
+  - intent: enable_reminders
+  - action: action_enable_reminders
+  - action: utter_enable_reminders
+  - intent: ask_water_intake
+  - action: action_provide_water_intake
+
+- story: User checks remaining intake for the day
+  steps:
+  - intent: inform_water_intake
+  - action: action_log_water
+  - action: utter_water_intake_logged
+  - intent: ask_remaining_intake
+  - action: action_provide_remaining_intake
+  - action: action_listen
+
+- story: User provides feedback
+  steps:
+  - intent: feedback
+  - action: utter_feedback_thanks
+
+- story: Complex conversation with reminders, logging, and goal setting
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: enable_reminders
+  - action: action_enable_reminders
+  - action: utter_enable_reminders
+  - intent: set_water_goal
+  - action: action_set_water_goal
+  - action: utter_water_goal_set
+  - intent: inform_water_intake
+  - action: action_log_water
+  - action: utter_water_intake_logged
+  - intent: ask_remaining_intake
+  - action: action_provide_remaining_intake
+  - intent: goodbye
+  - action: utter_goodbye
+
+

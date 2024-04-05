@@ -1,0 +1,103 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - inform_weight
+  - change_weight
+  - set_water_goal
+  - inform_water_intake
+  - enable_reminders
+  - ask_water_intake
+  - ask_remaining_intake
+  - feedback
+
+entities:
+  - person
+  - weight
+  - amount
+  - time
+  - unit
+
+slots:
+  person:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+  weight:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+  amount:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+  unit:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+  amount_logged:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+  time:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+  daily_water_goal:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: custom
+  water_intake_today:
+    type: float
+    initial_value: 0.0
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Здравствуйте! Как я могу помочь вам с отслеживанием выпитой воды сегодня?"
+  utter_goodbye:
+    - text: "До встречи! Не забывайте пить воду."
+  utter_ask_weight:
+    - text: "Не могли бы вы назвать свой вес в килограммах?"
+  utter_ask_water_goal:
+    - text: "Какова ваша цель по ежедневному потреблению воды?"
+  utter_water_intake_logged:
+    - text: "Понял, я записал ваше потребление воды."
+  utter_water_goal_set:
+    - text: "Ваша ежедневная цель по употреблению воды была обновлена."
+  utter_enable_reminders:
+    - text: "Напоминания включены."
+  utter_disable_reminders:
+    - text: "Напоминания выключены."
+  utter_ask_for_reminder_time:
+    - text: "Как часто нужно напоминать вам о необходимости пить воду?"
+  utter_provide_water_intake:
+    - text: "Исходя из вашего веса, рассчитывается ваша суточная потребность в воде. Вы должны стремиться к примерно {daily_water_goal} литрам."
+  utter_remaining_intake:
+    - text: "Вам нужно выпить {remaining_water} литров, чтобы достичь сегодняшней цели."
+  utter_out_of_scope:
+    - text: "Извините, но нам лучше не отвлекаться от нашей цели."
+
+actions:
+  - action_calculate_water_need
+  - action_log_water
+  - action_set_water_goal
+  - action_enable_reminders
+  - action_disable_reminders
+  - action_provide_water_intake
+  - action_provide_remaining_intake
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+

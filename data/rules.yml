@@ -1,0 +1,69 @@
+version: "3.1"
+
+rules:
+
+- rule: Greet user
+  conversation_start: true
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Inform weight and provide intake goal
+  steps:
+  - intent: inform_weight
+  - action: action_listen
+  - action: action_calculate_water_need
+  - action: utter_provide_water_intake
+
+- rule: Change weight
+  condition:
+  - slot_was_set:
+    - weight: null
+  steps:
+  - intent: change_weight
+  - action: action_calculate_water_need
+
+- rule: Set water goal manually
+  steps:
+  - intent: set_water_goal
+  - action: action_set_water_goal
+  - action: utter_water_goal_set
+
+- rule: Log water intake
+  steps:
+  - intent: inform_water_intake
+  - action: action_log_water
+  - action: utter_water_intake_logged
+
+- rule: Enable reminders
+  steps:
+  - intent: enable_reminders
+  - action: action_enable_reminders
+  - action: utter_enable_reminders
+
+- rule: Disable reminders
+  steps:
+  - intent: disable_reminders
+  - action: action_disable_reminders
+  - action: utter_disable_reminders
+
+- rule: Ask daily water intake
+  steps:
+  - intent: ask_water_intake
+  - action: action_provide_water_intake
+
+- rule: Ask remaining water intake
+  steps:
+  - intent: ask_remaining_intake
+  - action: action_provide_remaining_intake
+
+- rule: intent out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
