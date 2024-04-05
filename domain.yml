@@ -7,7 +7,6 @@ intents:
   - change_weight
   - set_water_goal
   - inform_water_intake
-  - enable_reminders
   - ask_water_intake
   - ask_remaining_intake
 
@@ -64,21 +63,17 @@ slots:
 
 responses:
   utter_greet:
-    - text: "Здравствуйте! Как я могу помочь вам с отслеживанием выпитой воды сегодня?"
+    - text: "Здравствуйте! Сегодня я буду помогать вам с отслеживанием выпитой воды."
   utter_goodbye:
     - text: "До встречи! Не забывайте пить воду."
   utter_ask_weight:
-    - text: "Не могли бы вы назвать свой вес в килограммах?"
+    - text: "Не могли бы вы назвать свой вес в килограммах? Тогда я бы смог вычислить вашу дневную норму."
   utter_ask_water_goal:
     - text: "Какова ваша цель по ежедневному потреблению воды?"
   utter_water_intake_logged:
     - text: "Понял, я записал ваше потребление воды."
   utter_water_goal_set:
     - text: "Ваша ежедневная цель по употреблению воды была обновлена."
-  utter_enable_reminders:
-    - text: "Напоминания включены."
-  utter_disable_reminders:
-    - text: "Напоминания выключены."
   utter_ask_for_reminder_time:
     - text: "Как часто нужно напоминать вам о необходимости пить воду?"
   utter_provide_water_intake:
@@ -92,8 +87,6 @@ actions:
   - action_calculate_water_need
   - action_log_water
   - action_set_water_goal
-  - action_enable_reminders
-  - action_disable_reminders
   - action_provide_water_intake
   - action_provide_remaining_intake
 

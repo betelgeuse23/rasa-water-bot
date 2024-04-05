@@ -4,19 +4,26 @@ stories:
 
 - story: user sets daily water goal
   steps:
+  - action: utter_ask_weight
   - intent: set_water_goal
     entities:
     - amount: "2"
     - unit: "л"
     - drink: "кофе"
   - action: action_set_water_goal
-  - action: utter_water_goal_set
+
+- story: User sets water goal
+  steps:
+  - action: utter_ask_weight
+  - intent: inform_weight
+  - action: action_listen
+  - action: action_calculate_water_need
+  - action: utter_provide_water_intake
 
 - story: User logs water intake and waits
   steps:
   - intent: inform_water_intake
   - action: action_log_water
-  - action: utter_water_intake_logged
   - action: action_listen
 
 - story: user logs water intake in liters
@@ -27,7 +34,6 @@ stories:
     - unit: "л"
     - drink: "вода"
   - action: action_log_water
-  - action: utter_water_intake_logged
 
 - story: user logs water intake in milliliters
   steps:
@@ -37,7 +43,6 @@ stories:
     - unit: "мл"
     - drink: "сок"
   - action: action_log_water
-  - action: utter_water_intake_logged
 
 - story: User updates weight
   steps:
@@ -51,32 +56,28 @@ stories:
   - action: action_provide_remaining_intake
   - action: action_listen
 
-- story: User enables and queries reminders
+- story: User checks remaining intake for the day
   steps:
-  - intent: enable_reminders
-  - action: action_enable_reminders
-  - action: utter_enable_reminders
-  - intent: ask_water_intake
-  - action: action_provide_water_intake
+  - intent: inform_water_intake
+  - action: action_log_water
+  - intent: ask_remaining_intake
+  - action: action_provide_remaining_intake
+  - action: action_listen
 
-- story: complex conversation with goal setting, logging, and querying
+- story: Complex conversation with logging and goal setting
   steps:
-  - intent: greet
-  - action: utter_greet
   - intent: set_water_goal
     entities:
     - amount: "200"
     - unit: "мл"
     - drink: "вода"
   - action: action_set_water_goal
-  - action: utter_water_goal_set
   - intent: inform_water_intake
     entities:
     - amount: "0.5"
     - unit: "л"
     - drink: "чай"
   - action: action_log_water
-  - action: utter_water_intake_logged
   - intent: ask_remaining_intake
   - action: action_provide_remaining_intake
   - action: action_listen

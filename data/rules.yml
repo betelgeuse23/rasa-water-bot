@@ -7,6 +7,12 @@ rules:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_ask_weight
+
+- rule: Greet user
+  steps:
+  - intent: greet
+  - action: utter_greet
 
 - rule: Say goodbye
   steps:
@@ -32,25 +38,11 @@ rules:
   steps:
   - intent: set_water_goal
   - action: action_set_water_goal
-  - action: utter_water_goal_set
 
 - rule: Log water intake
   steps:
   - intent: inform_water_intake
   - action: action_log_water
-  - action: utter_water_intake_logged
-
-- rule: Enable reminders
-  steps:
-  - intent: enable_reminders
-  - action: action_enable_reminders
-  - action: utter_enable_reminders
-
-- rule: Disable reminders
-  steps:
-  - intent: disable_reminders
-  - action: action_disable_reminders
-  - action: utter_disable_reminders
 
 - rule: Ask daily water intake
   steps:

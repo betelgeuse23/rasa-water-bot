@@ -11,7 +11,7 @@ class ActionCalculateWaterNeed(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        weight = tracker.get_slot('weight')
+        weight = next(tracker.get_latest_entity_values("weight"), None)
         if not weight:
             dispatcher.utter_message(text="Я не знаю ваш вес. Напишите его, пожалуйста.")
             return []
@@ -48,7 +48,7 @@ class ActionLogWater(Action):
                 amount *= 1000
             adjusted_amount = amount * hydration_index.get(drink)
             new_total = current_intake + adjusted_amount
-            dispatcher.utter_message(text=f"Добавлено {adjusted_amount} мл жидкости.")
+            dispatcher.utter_message(text=f"Понял, записываю вам {adjusted_amount} мл.")
             return [SlotSet("water_intake_today", new_total)]
         except ValueError:
             dispatcher.utter_message(text="Похоже, возникла проблема с указанными вами данными")
